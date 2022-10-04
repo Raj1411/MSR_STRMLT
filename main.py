@@ -97,8 +97,6 @@ def download_reports():
                     cursor: pointer;
                     }
                 </style>""", unsafe_allow_html=True)
-            else:
-                st.info('Sorry, Data is Not Available for this Month: '+ month_name_1)  
 
 
 
