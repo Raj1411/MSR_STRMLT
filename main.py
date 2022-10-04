@@ -2,10 +2,10 @@ from time import sleep
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-import requests as rq
-from bs4 import BeautifulSoup as bs
+# import requests as rq
+# from bs4 import BeautifulSoup as bs
 import streamlit as st
-import pandas as pd
+# import pandas as pd
 
 
 
