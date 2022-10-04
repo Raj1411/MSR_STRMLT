@@ -2,10 +2,8 @@ from time import sleep
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-# import requests as rq
-# from bs4 import BeautifulSoup as bs
 import streamlit as st
-# import pandas as pd
+from selenium.webdriver.firefox.options import Options
 
 
 
@@ -30,13 +28,13 @@ def download_reports():
         st.session_state.load_state = False
     if start or st.session_state.load_state:
         st.session_state.load_state = True
-        options = webdriver.ChromeOptions()
-        options.add_argument('--headless')
-        options.add_argument('--no-sandbox')
+        firefoxOptions = Options()
+        firefoxOptions.add_argument('--headless')
+        firefoxOptions.add_argument('--no-sandbox')
         # options.add_argument('--disable-dev-shm-usage')
-        options.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36')
+        firefoxOptions.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36')
         url = "https://www.dropbox.com/sh/zdy808b2b9ip9s0/AAAPBGleZeOGZ1R_0qXMw2_da?dl=0"
-        driver = webdriver.Chrome('chromedriver.exe',options=options)
+        driver = webdriver.Firefox(executable_path="/home/appuser/.conda/bin/geckodriver",options=firefoxOptions)
         driver.get(url)
 
         sleep(5)
