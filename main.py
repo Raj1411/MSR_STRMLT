@@ -97,6 +97,7 @@ def download_reports():
                     cursor: pointer;
                     }
                 </style>""", unsafe_allow_html=True)
+                st.write("Note: If Download Button is Not Available that Means Sales Report is Not Available for the Selected Month!")
 
 
 
