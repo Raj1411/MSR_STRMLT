@@ -11,6 +11,7 @@ file_names = []
 month_names = []
 links = []
 image_url = "https://cdn-icons-png.flaticon.com/512/1213/1213206.png"
+download_link = []
 
 
 
@@ -20,14 +21,20 @@ image_url = "https://cdn-icons-png.flaticon.com/512/1213/1213206.png"
 # add image_url in the title
 st.markdown(f'<img src="{image_url}" alt="Logo" width="100" height="100">', unsafe_allow_html=True)
 st.title('Download Reports')
+
+
+f_names = ('','BigBasket','Meesho','Boddess','Smytten')
+m_names = ('','Jan-22','Feb-22','Mar-22','Apr-22','May-22','June-22','July-22','Aug-22','Sep-22','Oct-22','Nov-22','Dec-22')
+
+portal_name_1 = st.selectbox('Select Portal', f_names)
+month_name_1 = st.selectbox('Select Month', m_names)
+
 start = st.button('Start...')
-
-
 def download_reports():
-    if "load_state" not in st.session_state:
-        st.session_state.load_state = False
-    if start or st.session_state.load_state:
-        st.session_state.load_state = True
+#     if "load_state" not in st.session_state:
+#         st.session_state.load_state = False
+#     if start or st.session_state.load_state:
+#         st.session_state.load_state = True
         firefoxOptions = Options()
         firefoxOptions.add_argument('--headless')
         firefoxOptions.add_argument('--no-sandbox')
@@ -37,7 +44,7 @@ def download_reports():
         driver = webdriver.Firefox(executable_path="/home/appuser/.conda/bin/geckodriver",options=firefoxOptions)
         driver.get(url)
 
-        sleep(5)
+        sleep(3)
 
         SCROLL_PAUSE_TIME = 1
 
@@ -58,79 +65,76 @@ def download_reports():
                 break
             last_height = new_height
 
-        file_name = driver.find_elements(By.CLASS_NAME, 'mc-media-cell-content')
+#         file_name = driver.find_elements(By.CLASS_NAME, 'mc-media-cell-content')
         url_link = driver.find_elements(By.XPATH, '//a[@href]')
-        for file in file_name:
-            if file.text.endswith('.xlsx') or file.text.endswith('.xls') or file.text.endswith('.csv'):
-                entire_split = file.text.split('.')
-                portal_name = entire_split[0].split('_')[0]
-                months = entire_split[0].split('_')[1]
-                if portal_name not in file_names:
-                    file_names.append(portal_name)
-                if months not in month_names:
-                    month_names.append(months)
+#         for file in file_name:
+#             if file.text.endswith('.xlsx') or file.text.endswith('.xls') or file.text.endswith('.csv'):
+#                 entire_split = file.text.split('.')
+#                 portal_name = entire_split[0].split('_')[0]
+#                 months = entire_split[0].split('_')[1]
+#                 if portal_name not in file_names:
+#                     file_names.append(portal_name)
+#                 if months not in month_names:
+#                     month_names.append(months)
 
 
         for link in url_link:
             ax = link.get_attribute('href')
             if "https://www.dropbox.com/sh" in ax:
-                links.append(ax)
+                aa = ax.replace("dl=0", "dl=1")
+                links.append(aa)
         driver.quit()
 
-        portal_name_1 = st.selectbox('**Select Portal**', list(file_names))
-        month_name_1 = st.selectbox('Select Month', list(month_names))
-        for link in links:
-            if portal_name_1 in link and month_name_1 in link:
-                replace_dl = link.replace('dl=0', 'dl=1')
-                # design download button
-                st.markdown(f'<a href="{replace_dl}" download="{portal_name_1}_{month_name_1}.xlsx" target="_blank" rel="noopener noreferrer"><button class="css-1aumxhk">Download</button></a>', unsafe_allow_html=True)
-                # fill color of button
-                st.markdown("""<style>
-                .css-1aumxhk {
-                    background-color: #ff0000;
-                    color: #ffffff;
-                    border: none;
-                    border-radius: 5px;
-                    padding: 10px 20px;
-                    font-size: 20px;
-                    font-weight: 600;
-                    cursor: pointer;
-                    }
-                </style>""", unsafe_allow_html=True)
-        st.write("Note: If Download Button is Not Available that Means Sales Report is Not Available for the Selected Month!")
+        for link_1 in links:
+            if portal_name_1 in link_1 and month_name_1 in link_1:
+                download_link.append(link_1)
+
+        if len(download_link) == 0:
+            st.info("Sorry, Report is Not Available for this Month: " + month_name_1)
+        else:
+            st.info('Report is Ready to Download')
+            st.markdown(f'<a href="{download_link[0]}" download="{portal_name_1}_{month_name_1}.xlsx" target="_blank" rel="noopener noreferrer"><button class="css-1aumxhk">Download</button></a>',
+                unsafe_allow_html=True)
+            st.markdown("""<style>
+                    .css-1aumxhk {
+                        background-color: #ff0000;
+                        color: #ffffff;
+                        border: none;
+                        border-radius: 5px;
+                        padding: 10px 20px;
+                        font-size: 20px;
+                        font-weight: 600;
+                        cursor: pointer;
+                        }
+                        </style>""", unsafe_allow_html=True)
+
+    with st.sidebar:
+        contact_form = """
+        <div style="background-color:#f5f5f5;padding:8px;border-radius:15px">
+        <h2 style="color:#ff0000;text-align:center;">Get In Touch With Me!</h2>
+        <form action="https://formsubmit.co/rajinder@swissbeauty.in" method="POST">
+        <div style="display:flex;justify-content:center;">
+        <input type="text" name="name" placeholder="Your Name" style="width:300px;height:40px;border-radius:5px;border:1px solid #ccc;padding:10px;margin:10px;">
+        </div>
+        <div style="display:flex;justify-content:center;">
+        <input type="email" name="email" placeholder="Your Email" style="width:300px;height:40px;border-radius:5px;border:1px solid #ccc;padding:10px;margin:10px;">
+        </div>
+        <div style="display:flex;justify-content:center;">
+        <textarea name="message" placeholder="Message" style="width:300px;height:100px;border-radius:5px;border:1px solid #ccc;padding:10px;margin:10px;"></textarea>
+        </div>
+        <div style="display:flex;justify-content:center;">
+        <button type="submit" style="width:300px;height:40px;border-radius:5px;border:1px solid #ccc;padding:10px;margin:10px;background-color:#ff0000;color:#ffffff;">Send</button>
+        </div>
+        </form>
+        </div>
+
+        """
+        st.markdown(contact_form, unsafe_allow_html=True)
 
 
-
-    else:
-        st.write('Press the button to start...')
-    st.write("##")
-    st.write("##")
-    st.write("##")
-    with st.container():
-        st.write("---")
-        left_column, right_column = st.columns(2)
-        with right_column:
-            contact_form = """
-            <div style="background-color:#f5f5f5;padding:8px;border-radius:15px">
-            <h2 style="color:#ff0000;text-align:center;">Get In Touch With Me!</h2>
-            <form action="https://formsubmit.co/rajinder@swissbeauty.in" method="POST">
-            <div style="display:flex;justify-content:center;">
-            <input type="text" name="name" placeholder="Your Name" style="width:300px;height:40px;border-radius:5px;border:1px solid #ccc;padding:10px;margin:10px;">
-            </div>
-            <div style="display:flex;justify-content:center;">
-            <input type="email" name="email" placeholder="Your Email" style="width:300px;height:40px;border-radius:5px;border:1px solid #ccc;padding:10px;margin:10px;">
-            </div>
-            <div style="display:flex;justify-content:center;">
-            <textarea name="message" placeholder="Message" style="width:300px;height:100px;border-radius:5px;border:1px solid #ccc;padding:10px;margin:10px;"></textarea>
-            </div>
-            <div style="display:flex;justify-content:center;">
-            <button type="submit" style="width:300px;height:40px;border-radius:5px;border:1px solid #ccc;padding:10px;margin:10px;background-color:#ff0000;color:#ffffff;">Send</button>
-            </div>
-            </form>
-            </div>
-
-            """
-            st.markdown(contact_form, unsafe_allow_html=True)
-
+            
+            
+            
+            
 if __name__== "__main__":
     download_reports()
