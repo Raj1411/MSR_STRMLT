@@ -120,6 +120,7 @@ def download_reports():
 
         """
         st.markdown(contact_form, unsafe_allow_html=True)
+        st.write("[Back to Website > ] (https://raj1411-msr-strmlt-main-za0rgt.streamlitapp.com/)")
 
 
 
