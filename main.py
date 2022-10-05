@@ -31,6 +31,7 @@ month_name_1 = st.selectbox('Select Month', m_names)
 
 start = st.button('Start...')
 def download_reports():
+        if start:
 #     if "load_state" not in st.session_state:
 #         st.session_state.load_state = False
 #     if start or st.session_state.load_state:
