@@ -31,6 +31,39 @@ month_name_1 = st.selectbox('Select Month', m_names)
 
 start = st.button('Generate Report  ...')
 
+hide_menu = """
+<style>
+#MainMenu {visibility: visible;}
+ :root {
+  --primary: #f63366;
+ --bg-color: #f63366;
+ --text-normal: #f63366;
+ }
+ footer {
+ visibility: hidden;
+}
+
+
+ footer:after {
+    content:'Developed by [Rajinder Singh]';
+    visibility: visible;
+    display: block;
+    max-width: 1000px;
+    margin:0px auto;
+    width: 100%;
+    height: 30px;
+    position: relative;
+    background: #666;
+    color: white;
+    padding: 5px;
+    top: 2px;
+ }
+ </style>
+ """
+
+st.markdown(hide_menu, unsafe_allow_html=True) 
+
+@st.cache
 def download_reports():
     if start:
         firefoxOptions = Options()
