@@ -110,7 +110,7 @@ def download_reports():
         <input type="email" name="email" placeholder="Your Email" style="width:300px;height:40px;border-radius:5px;border:1px solid #ccc;padding:10px;margin:10px;">
         </div>
         <div style="display:flex;justify-content:center;">
-        <textarea name="message" placeholder="Message" style="width:300px;height:100px;border-radius:5px;border:1px solid #ccc;padding:10px;margin:10px;"></textarea>
+        <textarea name="message" placeholder="Your Message for me" style="width:300px;height:100px;border-radius:5px;border:1px solid #ccc;padding:10px;margin:10px;"></textarea>
         </div>
         <div style="display:flex;justify-content:center;">
         <button type="submit" style="width:300px;height:40px;border-radius:5px;border:1px solid #ccc;padding:10px;margin:10px;background-color:#ff0000;color:#ffffff;">Send</button>
