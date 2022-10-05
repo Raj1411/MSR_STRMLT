@@ -107,8 +107,8 @@ def download_reports():
                         cursor: pointer;
                         }
                         </style>""", unsafe_allow_html=True)
-
-    with st.sidebar:
+        
+      with st.sidebar:
         contact_form = """
         <div style="background-color:#f5f5f5;padding:8px;border-radius:15px">
         <h2 style="color:#ff0000;text-align:center;">Get In Touch With Me!</h2>
@@ -130,6 +130,15 @@ def download_reports():
 
         """
         st.markdown(contact_form, unsafe_allow_html=True)
+
+
+
+
+
+
+
+
+
 
 
             
