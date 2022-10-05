@@ -65,7 +65,7 @@ st.markdown(hide_menu, unsafe_allow_html=True)
 
 
 
-@st.cache(allow_output_mutation=True)
+# @st.cache(allow_output_mutation=True)
 def download_reports():
     if start:
         firefoxOptions = Options()
