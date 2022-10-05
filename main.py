@@ -22,7 +22,7 @@ st.markdown(f'<img src="{image_url}" alt="Logo" width="100" height="100">', unsa
 st.title('Download Reports')
 
 
-f_names = ('','BigBasket','Meesho','Boddess','Smytten')
+f_names = ('','BigBasket','Meesho','Boddess','Smytten','Myntra')
 m_names = ('','Jan-22','Feb-22','Mar-22','Apr-22','May-22','June-22','July-22','Aug-22','Sep-22','Oct-22','Nov-22','Dec-22')
 
 portal_name_1 = st.selectbox('Select Portal', f_names)
