@@ -32,59 +32,44 @@ month_name_1 = st.selectbox('Select Month', m_names)
 start = st.button('Start...')
 def download_reports():
         if start:
-#     if "load_state" not in st.session_state:
-#         st.session_state.load_state = False
-#     if start or st.session_state.load_state:
-#         st.session_state.load_state = True
-        firefoxOptions = Options()
-        firefoxOptions.add_argument('--headless')
-        firefoxOptions.add_argument('--no-sandbox')
-        # options.add_argument('--disable-dev-shm-usage')
-        firefoxOptions.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36')
-        url = "https://www.dropbox.com/sh/zdy808b2b9ip9s0/AAAPBGleZeOGZ1R_0qXMw2_da?dl=0"
-        driver = webdriver.Firefox(executable_path="/home/appuser/.conda/bin/geckodriver",options=firefoxOptions)
-        driver.get(url)
+                firefoxOptions = Options()
+                firefoxOptions.add_argument('--headless')
+                firefoxOptions.add_argument('--no-sandbox')
+                # options.add_argument('--disable-dev-shm-usage')
+                firefoxOptions.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36')
+                url = "https://www.dropbox.com/sh/zdy808b2b9ip9s0/AAAPBGleZeOGZ1R_0qXMw2_da?dl=0"
+                driver = webdriver.Firefox(executable_path="/home/appuser/.conda/bin/geckodriver",options=firefoxOptions)
+                driver.get(url)
 
-        sleep(3)
+                sleep(3)
 
-        SCROLL_PAUSE_TIME = 1
+                SCROLL_PAUSE_TIME = 1
 
-        # Get scroll height
-        last_height = driver.execute_script("return document.documentElement.scrollHeight")
-        while True:
-            sleep(10)
-            # Scroll down to bottom
-            driver.execute_script("window.scrollTo(0,document.documentElement.scrollHeight);")
+                # Get scroll height
+                last_height = driver.execute_script("return document.documentElement.scrollHeight")
+                while True:
+                    sleep(10)
+                    # Scroll down to bottom
+                    driver.execute_script("window.scrollTo(0,document.documentElement.scrollHeight);")
 
-            # Wait to load page
-            sleep(SCROLL_PAUSE_TIME)
+                    # Wait to load page
+                    sleep(SCROLL_PAUSE_TIME)
 
-            # Calculate new scroll height and compare with last scroll height
-            new_height = driver.execute_script("return document.documentElement.scrollHeight")
-            if new_height == last_height:
-                print("break")
-                break
-            last_height = new_height
+                    # Calculate new scroll height and compare with last scroll height
+                    new_height = driver.execute_script("return document.documentElement.scrollHeight")
+                    if new_height == last_height:
+                        print("break")
+                        break
+                    last_height = new_height
 
-#         file_name = driver.find_elements(By.CLASS_NAME, 'mc-media-cell-content')
-        url_link = driver.find_elements(By.XPATH, '//a[@href]')
-#         for file in file_name:
-#             if file.text.endswith('.xlsx') or file.text.endswith('.xls') or file.text.endswith('.csv'):
-#                 entire_split = file.text.split('.')
-#                 portal_name = entire_split[0].split('_')[0]
-#                 months = entire_split[0].split('_')[1]
-#                 if portal_name not in file_names:
-#                     file_names.append(portal_name)
-#                 if months not in month_names:
-#                     month_names.append(months)
+                url_link = driver.find_elements(By.XPATH, '//a[@href]')
 
-
-        for link in url_link:
-            ax = link.get_attribute('href')
-            if "https://www.dropbox.com/sh" in ax:
-                aa = ax.replace("dl=0", "dl=1")
-                links.append(aa)
-        driver.quit()
+                for link in url_link:
+                    ax = link.get_attribute('href')
+                    if "https://www.dropbox.com/sh" in ax:
+                        aa = ax.replace("dl=0", "dl=1")
+                        links.append(aa)
+                driver.quit()
 
         for link_1 in links:
             if portal_name_1 in link_1 and month_name_1 in link_1:
