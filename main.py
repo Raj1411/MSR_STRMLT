@@ -193,6 +193,7 @@ def send_email():
             server.sendmail(sender_email, receiver_email, text)
             server.quit()
             st.success('Email Sent Successfully')
+            st.write("##")
 
        
        
