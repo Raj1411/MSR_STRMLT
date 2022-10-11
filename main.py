@@ -180,19 +180,19 @@ def send_email():
         subject = st.text_input('Enter Subject')
         message = st.text_area('Enter Message')
 
-if st.button('Send Email'):
-    msg = MIMEMultipart()
-    msg['From'] = sender_email
-    msg['To'] = ", ".join(receiver_email)
-    msg['Subject'] = subject
-    msg.attach(MIMEText(message, 'plain'))
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.starttls()
-    server.login(sender_email, sender_password)
-    text = msg.as_string()
-    server.sendmail(sender_email, receiver_email, text)
-    server.quit()
-    st.success('Email Sent Successfully')
+        if st.button('Send Email'):
+            msg = MIMEMultipart()
+            msg['From'] = sender_email
+            msg['To'] = ", ".join(receiver_email)
+            msg['Subject'] = subject
+            msg.attach(MIMEText(message, 'plain'))
+            server = smtplib.SMTP('smtp.gmail.com', 587)
+            server.starttls()
+            server.login(sender_email, sender_password)
+            text = msg.as_string()
+            server.sendmail(sender_email, receiver_email, text)
+            server.quit()
+            st.success('Email Sent Successfully')
 
        
        
