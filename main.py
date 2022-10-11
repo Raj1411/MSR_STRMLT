@@ -173,9 +173,9 @@ def send_email():
         st.write("##")
         st.write("##")
         st.write("##")
-        sender_email = 'rajinder@swissbeauty.in'
-        sender_password = '9711609399AA'
-        receiver_email = ['jyoti.batra@swissbeauty.in','pramod@swissbeauty.in','deepak.sharma@swissbeauty.in']
+        sender_email = st.secrets['email']
+        sender_password = st.secrets['pswrd']
+        receiver_email = st.secrets['recipient']
         # receiver_email = ['srajinder816@gmail.com','hazurmaharaj@gmail.com']
         subject = st.text_input('Enter Subject')
         message = st.text_area('Enter Message')
