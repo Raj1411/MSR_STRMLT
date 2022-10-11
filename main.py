@@ -4,6 +4,11 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import streamlit as st
 from selenium.webdriver.firefox.options import Options
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from email.mime.base import MIMEBase
+
 
 
 
@@ -157,6 +162,39 @@ def download_reports():
         st.markdown(contact_form, unsafe_allow_html=True)
        
        
+def send_email():
+    with st.sidebar:
+        st.write("##")
+        st.write('-'*100)
+        st.write("##")
+        st.write("##")
+        st.write("##")
+        st.write("##")
+        st.write("##")
+        st.write("##")
+        st.write("##")
+        sender_email = 'rajinder@swissbeauty.in'
+        sender_password = '9711609399AA'
+        receiver_email = ['jyoti.batra@swissbeauty.in','pramod@swissbeauty.in','deepak.sharma@swissbeauty.in']
+        # receiver_email = ['srajinder816@gmail.com','hazurmaharaj@gmail.com']
+        subject = st.text_input('Enter Subject')
+        message = st.text_area('Enter Message')
+
+        if st.button('Send Email'):
+            msg = MIMEMultipart()
+            msg['From'] = sender_email
+            msg['To'] = ", ".join(receiver_email)
+            msg['Subject'] = subject
+            msg.attach(MIMEText(message, 'plain'))
+            server = smtplib.SMTP('smtp.gmail.com', 587)
+            server.starttls()
+            server.login(sender_email, sender_password)
+            text = msg.as_string()
+            server.sendmail(sender_email, receiver_email, text)
+            server.quit()
+            st.success('Email Sent Successfully')
+
+       
        
 
 
@@ -172,6 +210,7 @@ def download_reports():
 
 if __name__== "__main__":
     download_reports()
+   send_email()
     
     
     
